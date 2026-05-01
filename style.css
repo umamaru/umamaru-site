@@ -1,0 +1,90 @@
+:root {
+  --bg: #f1f5f1;
+  --card: #ffffff;
+  --main: #2f5e3f;
+  --main-soft: #4f7d5f;
+  --text: #223026;
+  --muted: #627469;
+  --warn: #8a5a2b;
+  --warn-bg: #fff8ee;
+  --danger: #8f2f2f;
+  --danger-bg: #ffecec;
+  --border: #dce5dc;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, #f6faf6 0%, var(--bg) 100%);
+}
+
+.app { max-width: 900px; margin: 0 auto; padding: 16px; }
+.app-header h1 { margin: 8px 0; font-size: 1.6rem; color: var(--main); }
+.eyebrow { margin: 0; color: var(--main-soft); font-weight: 700; font-size: .85rem; }
+.lead { margin-top: 0; color: var(--muted); font-size: .95rem; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 4px 12px rgba(37, 64, 46, .06);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; color: var(--muted); }
+select, button {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1rem;
+}
+button {
+  background: var(--main);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+}
+
+.error {
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--danger-bg);
+  color: var(--danger);
+  border: 1px solid #ffcece;
+}
+.hidden { display: none; }
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.stat-card h2 { font-size: .9rem; margin: 0 0 6px; color: var(--muted); }
+.stat-card p { margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--main); }
+.stat-card small { display: block; margin-top: 6px; color: var(--warn); }
+
+.table-wrap h2 { margin: 0 0 10px; font-size: 1.05rem; color: var(--main); }
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 760px; }
+th, td { border-bottom: 1px solid var(--border); padding: 8px; text-align: left; font-size: .88rem; white-space: nowrap; }
+th { background: #f6faf6; color: var(--main); position: sticky; top: 0; }
+tr.low-radiation { background: var(--warn-bg); }
+
+@media (min-width: 768px) {
+  .controls {
+    grid-template-columns: 1fr 1fr auto;
+    align-items: end;
+  }
+  .summary-grid { grid-template-columns: repeat(4, 1fr); }
+}
