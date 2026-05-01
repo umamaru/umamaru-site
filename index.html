@@ -1,402 +1,82 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>うままる｜川口の農家直送八百屋・キッチンカー</title>
-<meta name="description" content="うままるは埼玉県川口市を拠点に、農家を訪問し、現地で選んだ野菜を届ける八百屋です。店舗販売、マルシェ、キッチンカー、スーパー納品、法人取引に対応しています。" />
-
-<style>
-:root{
-  --green:#183b28;
-  --green2:#2f5a40;
-  --cream:#f7f3e8;
-  --cream2:#efe5d4;
-  --orange:#d8793b;
-  --red:#d94a38;
-  --yellow:#f2b94b;
-  --purple:#5b3b72;
-  --text:#222;
-  --muted:#666;
-  --white:#fff;
-}
-
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
-  color:var(--text);
-  background:#fff;
-  line-height:1.8;
-}
-a{text-decoration:none;color:inherit}
-.container{width:min(1100px,calc(100% - 40px));margin:auto}
-
-header{
-  position:sticky;top:0;z-index:20;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid #eee;
-}
-.header-inner{display:flex;justify-content:space-between;align-items:center;padding:15px 0}
-.logo{font-weight:900;color:var(--green);font-size:24px;letter-spacing:.08em}
-nav{display:flex;gap:22px;font-size:14px;color:#555}
-nav a:hover{color:var(--green)}
-
-.hero{
-  min-height:720px;
-  display:flex;
-  align-items:center;
-  color:#fff;
-  background:
-    radial-gradient(circle at 75% 35%,rgba(242,185,75,.95) 0 9%,transparent 10%),
-    radial-gradient(circle at 84% 52%,rgba(217,74,56,.95) 0 7%,transparent 8%),
-    radial-gradient(circle at 69% 61%,rgba(91,59,114,.9) 0 8%,transparent 9%),
-    radial-gradient(circle at 88% 72%,rgba(47,90,64,.95) 0 10%,transparent 11%),
-    linear-gradient(110deg,rgba(24,59,40,.96) 0%,rgba(24,59,40,.82) 48%,rgba(24,59,40,.25) 100%),
-    linear-gradient(135deg,#315f43,#f7f3e8);
-  overflow:hidden;
-}
-.hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
-.eyebrow{color:#f5d6a0;font-size:13px;font-weight:800;letter-spacing:.16em}
-.hero h1{font-size:clamp(38px,6vw,76px);line-height:1.15;margin:18px 0 24px;letter-spacing:.04em}
-.hero p{font-size:clamp(16px,2vw,21px);max-width:650px}
-.buttons{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 24px;border-radius:999px;font-weight:800}
-.btn-primary{background:#fff;color:var(--green)}
-.btn-dark{background:var(--green);color:#fff}
-.btn-outline{border:1px solid rgba(255,255,255,.7);color:#fff}
-
-.visual-basket{
-  position:relative;
-  min-height:420px;
-  border-radius:34px;
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.24);
-  box-shadow:0 30px 80px rgba(0,0,0,.25);
-  overflow:hidden;
-}
-.visual-basket:before{
-  content:"";
-  position:absolute;inset:38px 24px 42px;
-  border-radius:38px;
-  background:
-    radial-gradient(circle at 25% 35%,var(--red) 0 12%,transparent 13%),
-    radial-gradient(circle at 42% 28%,#e9553f 0 10%,transparent 11%),
-    radial-gradient(circle at 62% 35%,var(--yellow) 0 13%,transparent 14%),
-    radial-gradient(circle at 74% 55%,var(--purple) 0 16%,transparent 17%),
-    radial-gradient(circle at 35% 68%,#5aa367 0 15%,transparent 16%),
-    radial-gradient(circle at 55% 70%,#f0d15c 0 11%,transparent 12%),
-    linear-gradient(135deg,#fff7e8,#e8d5b4);
-}
-.visual-basket:after{
-  content:"FARM DIRECT";
-  position:absolute;left:35px;bottom:28px;
-  color:rgba(255,255,255,.75);
-  font-weight:900;
-  letter-spacing:.18em;
-}
-
-section{padding:90px 0}
-.section-title{margin-bottom:36px}
-.section-title span{font-size:13px;font-weight:900;color:var(--orange);letter-spacing:.14em}
-.section-title h2{font-size:clamp(28px,4vw,46px);line-height:1.3;color:var(--green);margin:8px 0}
-.section-title p{color:var(--muted);max-width:760px}
-.cream{background:var(--cream)}
-
-.about-grid,.record-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.lead{font-size:19px;font-weight:800;color:var(--green)}
-.muted{color:var(--muted)}
-
-.image-panel{
-  min-height:360px;
-  border-radius:32px;
-  background:
-    radial-gradient(circle at 25% 28%,#d94a38 0 10%,transparent 11%),
-    radial-gradient(circle at 72% 35%,#f2b94b 0 13%,transparent 14%),
-    radial-gradient(circle at 42% 70%,#2f5a40 0 16%,transparent 17%),
-    linear-gradient(135deg,#fff,#eee0c6);
-  position:relative;
-  box-shadow:0 18px 50px rgba(0,0,0,.08);
-}
-.image-panel:after{
-  content:"うままるの売り場イメージ";
-  position:absolute;left:24px;bottom:22px;
-  background:rgba(24,59,40,.88);
-  color:#fff;
-  padding:8px 14px;
-  border-radius:999px;
-  font-size:13px;
-  font-weight:800;
-}
-
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.card{
-  background:#fff;
-  border:1px solid #eee;
-  border-radius:26px;
-  padding:30px;
-  box-shadow:0 12px 36px rgba(0,0,0,.045);
-}
-.icon{
-  width:56px;height:56px;border-radius:18px;
-  background:linear-gradient(135deg,var(--green2),#6b9b6d);
-  margin-bottom:18px;
-}
-.card h3{color:var(--green);font-size:22px;margin:0 0 10px}
-.card p{color:var(--muted);margin:0;font-size:15px}
-.statement{
-  margin-top:42px;
-  padding:38px;
-  border-radius:32px;
-  color:#fff;
-  background:
-    radial-gradient(circle at 92% 20%,rgba(242,185,75,.8),transparent 16%),
-    linear-gradient(135deg,var(--green),var(--green2));
-  font-size:clamp(24px,4vw,40px);
-  line-height:1.45;
-  font-weight:900;
-}
-
-.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.product{
-  border-radius:26px;
-  overflow:hidden;
-  background:#fff;
-  border:1px solid #eee;
-  box-shadow:0 12px 34px rgba(0,0,0,.045);
-}
-.product-visual{height:190px;display:flex;align-items:center;justify-content:center}
-.tomato{background:radial-gradient(circle,#e94b3c 0 23%,transparent 24%),linear-gradient(135deg,#fff2ed,#f8d9d2)}
-.paprika{background:radial-gradient(circle,#f2b94b 0 28%,transparent 29%),linear-gradient(135deg,#fff6d8,#f6df9b)}
-.nasu{background:radial-gradient(circle,#5b3b72 0 30%,transparent 31%),linear-gradient(135deg,#f1e9f8,#d7c2e8)}
-.shishi{background:radial-gradient(circle,#4f9a5c 0 28%,transparent 29%),linear-gradient(135deg,#edf8ee,#cbe8cf)}
-.product-body{padding:20px}
-.product h3{margin:0 0 6px;color:var(--green)}
-.product p{margin:0;color:var(--muted);font-size:14px}
-
-.sales{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.sales-card{
-  background:#fff;
-  border-radius:26px;
-  padding:26px;
-  border:1px solid #eee;
-}
-.sales-card strong{display:block;color:var(--green);font-size:21px;margin-bottom:8px}
-
-.record-badge{
-  min-height:300px;
-  border-radius:32px;
-  background:
-    radial-gradient(circle at 30% 35%,#fff 0 13%,transparent 14%),
-    radial-gradient(circle at 65% 45%,#f2b94b 0 12%,transparent 13%),
-    linear-gradient(135deg,#2f5a40,#f7f3e8);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:#fff;
-  font-size:28px;
-  font-weight:900;
-  box-shadow:0 18px 50px rgba(0,0,0,.1);
-}
-
-.business{
-  background:
-    radial-gradient(circle at 90% 10%,rgba(242,185,75,.22),transparent 18%),
-    linear-gradient(135deg,#102818,var(--green));
-  color:#fff;
-}
-.business .section-title h2,.business .section-title p,.business .section-title span{color:#fff}
-.business-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
-.business-card{
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(255,255,255,.07);
-  border-radius:26px;
-  padding:28px;
-}
-.business-card h3{margin-top:0;font-size:22px}
-
-.story{text-align:center;max-width:800px;margin:auto}
-.story h2{font-size:clamp(30px,5vw,52px);line-height:1.35;color:var(--green)}
-
-.cta{
-  background:
-    radial-gradient(circle at 20% 30%,rgba(217,74,56,.16),transparent 14%),
-    radial-gradient(circle at 80% 70%,rgba(47,90,64,.2),transparent 18%),
-    var(--cream);
-  text-align:center;
-}
-.cta h2{font-size:clamp(28px,4vw,44px);color:var(--green);margin-bottom:12px}
-.cta .buttons{justify-content:center}
-
-footer{background:#102318;color:rgba(255,255,255,.78);padding:34px 0;font-size:14px}
-.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-
-@media(max-width:850px){
-  nav{display:none}
-  .hero{min-height:680px}
-  .hero-inner,.about-grid,.record-grid{grid-template-columns:1fr}
-  .visual-basket{min-height:300px}
-  .features,.products,.sales,.business-grid{grid-template-columns:1fr}
-  section{padding:68px 0}
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>農家訪問前 気象チェック</title>
+  <meta name="description" content="都道府県ごとの日射量・天気・気温を確認できる農家訪問前チェックアプリ" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-<header>
-  <div class="container header-inner">
-    <a class="logo" href="#">うままる</a>
-    <nav>
-      <a href="#about">うままるとは</a>
-      <a href="#quality">美味しさ</a>
-      <a href="#products">商品</a>
-      <a href="#sales">販売場所</a>
-      <a href="#business">法人向け</a>
-    </nav>
-  </div>
-</header>
+  <main class="app">
+    <header class="app-header">
+      <p class="eyebrow">ハウス栽培向け</p>
+      <h1>農家訪問前 気象チェック</h1>
+      <p class="lead">都道府県（県庁所在地）ごとの直近/予報7日間を比較できます。</p>
+    </header>
 
-<main>
-<section class="hero">
-  <div class="container hero-inner">
-    <div>
-      <span class="eyebrow">KAWAGUCHI FARM DIRECT</span>
-      <h1>ちゃんと美味しい野菜を、<br>ちゃんと届ける。</h1>
-      <p>うままるは、川口を拠点に農家を訪問し、現地で選んだ野菜を届ける八百屋です。店舗、マルシェ、キッチンカー、スーパー納品を通じて、作る人と食べる人をつないでいます。</p>
-      <div class="buttons">
-        <a class="btn btn-primary" href="#sales">販売場所を見る</a>
-        <a class="btn btn-outline" href="#business">法人取引のご相談</a>
+    <section class="controls card">
+      <label>
+        都道府県
+        <select id="prefectureSelect" aria-label="都道府県"></select>
+      </label>
+      <label>
+        表示期間
+        <select id="periodSelect" aria-label="表示期間">
+          <option value="past">過去7日</option>
+          <option value="future">今後7日</option>
+        </select>
+      </label>
+      <button id="loadButton" type="button">更新</button>
+    </section>
+
+    <section id="errorBox" class="error hidden" role="alert"></section>
+
+    <section class="summary-grid">
+      <article class="card stat-card">
+        <h2>選択地点</h2>
+        <p id="selectedPlace">-</p>
+      </article>
+      <article class="card stat-card">
+        <h2>7日間の日射量合計</h2>
+        <p><span id="sumRadiation">-</span> MJ/㎡</p>
+      </article>
+      <article class="card stat-card">
+        <h2>1日平均日射量</h2>
+        <p><span id="avgRadiation">-</span> MJ/㎡/日</p>
+      </article>
+      <article class="card stat-card">
+        <h2>低日射日数</h2>
+        <p><span id="lowRadiationDays">-</span> 日</p>
+        <small id="lowRadiationComment"></small>
+      </article>
+    </section>
+
+    <section class="table-wrap card">
+      <h2>日別データ</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>日付</th>
+              <th>天気</th>
+              <th>日射量<br>MJ/㎡/日</th>
+              <th>最高気温</th>
+              <th>最低気温</th>
+              <th>昼平均気温</th>
+              <th>夜平均気温</th>
+              <th>降水量</th>
+              <th>湿度</th>
+            </tr>
+          </thead>
+          <tbody id="weatherTableBody">
+            <tr><td colspan="9">データを読み込み中...</td></tr>
+          </tbody>
+        </table>
       </div>
-    </div>
-    <div class="visual-basket" aria-label="新鮮な野菜が並ぶイメージ"></div>
-  </div>
-</section>
+    </section>
+  </main>
 
-<section id="about">
-  <div class="container about-grid">
-    <div>
-      <div class="section-title">
-        <span>ABOUT</span>
-        <h2>農家を見て、味を見て、選ぶ八百屋。</h2>
-      </div>
-      <p class="lead">元農業資材メーカー営業として、数多くの農家さんと向き合ってきた経験を仕入れに活かしています。</p>
-      <p class="muted">現地で試食し、栽培方法や品質の安定性を確認しながら、納得できるものを仕入れる。うままるは、ただ「農家直送」と言うだけではなく、どの農家さんから仕入れるかを大切にしています。</p>
-      <p class="muted">2021年から事業を開始し、店舗販売、サミット、マルシェ、キッチンカーへと販売の場を広げています。</p>
-    </div>
-    <div class="image-panel"></div>
-  </div>
-</section>
-
-<section id="quality" class="cream">
-  <div class="container">
-    <div class="section-title">
-      <span>QUALITY</span>
-      <h2>美味しさには、理由があります。</h2>
-      <p>農家さんとの距離の近さだけでなく、現場を見ること、味を見ること、継続して品質を確認することを大切にしています。</p>
-    </div>
-
-    <div class="features">
-      <div class="card"><div class="icon"></div><h3>現地で試食</h3><p>実際に食べて、自信を持ってすすめられるものを選びます。</p></div>
-      <div class="card"><div class="icon"></div><h3>栽培方法を確認</h3><p>作り方や管理の考え方を聞き、品質が安定する理由まで見ます。</p></div>
-      <div class="card"><div class="icon"></div><h3>農家と直接交渉</h3><p>状態の良いものを適切なタイミングで仕入れます。</p></div>
-    </div>
-
-    <div class="statement">農家直送ではなく、<br>農家を選んでいます。</div>
-  </div>
-</section>
-
-<section id="products">
-  <div class="container">
-    <div class="section-title">
-      <span>PRODUCTS</span>
-      <h2>季節の野菜・果物</h2>
-      <p>その時期に本当におすすめできるものを中心に扱います。</p>
-    </div>
-
-    <div class="products">
-      <div class="product"><div class="product-visual tomato"></div><div class="product-body"><h3>ミニトマト</h3><p>味の濃さと鮮度を重視。</p></div></div>
-      <div class="product"><div class="product-visual paprika"></div><div class="product-body"><h3>パプリカ</h3><p>彩りと甘みが魅力。</p></div></div>
-      <div class="product"><div class="product-visual nasu"></div><div class="product-body"><h3>ナス</h3><p>料理に使いやすい旬野菜。</p></div></div>
-      <div class="product"><div class="product-visual shishi"></div><div class="product-body"><h3>シシトウ</h3><p>農家直送ならではの鮮度。</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="sales" class="cream">
-  <div class="container">
-    <div class="section-title">
-      <span>SALES</span>
-      <h2>販売場所</h2>
-      <p>店舗販売を中心に、スーパー、マルシェ、キッチンカーでも販売しています。</p>
-    </div>
-
-    <div class="sales">
-      <div class="sales-card"><strong>店舗販売</strong><p class="muted">川口を拠点に販売。</p></div>
-      <div class="sales-card"><strong>サミット</strong><p class="muted">地場産・農家直送コーナー等で販売。</p></div>
-      <div class="sales-card"><strong>マルシェ</strong><p class="muted">都内イベントや農大マルシェなどに出店。</p></div>
-      <div class="sales-card"><strong>キッチンカー</strong><p class="muted">野菜・果物を活かしたメニューを展開。</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="record">
-  <div class="container record-grid">
-    <div class="record-badge">東京農業大学<br>農大マルシェ</div>
-    <div>
-      <div class="section-title">
-        <span>WORKS</span>
-        <h2>農業と都市をつなぐ取り組み</h2>
-      </div>
-      <p class="muted">東京農業大学「農大マルシェ」にて、学生・生産者との連携企画に参加。都市部のお客様に、農業や生産者の魅力を伝える場づくりにも取り組んでいます。</p>
-    </div>
-  </div>
-</section>
-
-<section id="business" class="business">
-  <div class="container">
-    <div class="section-title">
-      <span>BUSINESS</span>
-      <h2>法人・取引をご希望の方へ</h2>
-      <p>スーパー、飲食店、イベント運営者様向けに、野菜・果物の納品や販売企画のご相談を承ります。</p>
-    </div>
-
-    <div class="business-grid">
-      <div class="business-card"><h3>目利き仕入れ</h3><p>品質の安定した農家さんを選定します。</p></div>
-      <div class="business-card"><h3>ストーリー販売</h3><p>産地・農家・味の特徴を伝える売り場づくりにも対応します。</p></div>
-      <div class="business-card"><h3>小ロット対応</h3><p>店舗規模や売場状況に応じて、少量からの納品・テスト販売にも対応できます。</p></div>
-      <div class="business-card"><h3>イベント連携</h3><p>マルシェやキッチンカー出店を通じた販売企画も相談可能です。</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="story">
-  <div class="container">
-    <h2>農業と都市をつなぐ。<br>その間に立つのが、うままるです。</h2>
-    <p class="muted">地方の農家さんがつくる本当に美味しいものを、都市部のお客様に届ける。うままるは、販売・流通・現場理解を通じて、農業に総合的に関わることを目指しています。</p>
-  </div>
-</section>
-
-<section id="contact" class="cta">
-  <div class="container">
-    <h2>最新情報はInstagramへ</h2>
-    <p class="muted">出店情報、入荷情報、取扱い商品について発信しています。</p>
-    <div class="buttons">
-      <a class="btn btn-dark" href="#">Instagramを見る</a>
-      <a class="btn btn-dark" href="#">BASEを見る</a>
-      <a class="btn btn-dark" href="#business">取引相談</a>
-    </div>
-  </div>
-</section>
-</main>
-
-<footer>
-  <div class="container footer-inner">
-    <div>© うままる</div>
-    <div>川口の農家直送八百屋・キッチンカー｜うままる</div>
-  </div>
-</footer>
-
+  <script src="app.js" defer></script>
 </body>
 </html>
