@@ -3,80 +3,199 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>農家訪問前 気象チェック</title>
-  <meta name="description" content="都道府県ごとの日射量・天気・気温を確認できる農家訪問前チェックアプリ" />
-  <link rel="stylesheet" href="style.css" />
+  <title>うままる｜野菜直売所</title>
+  <meta name="description" content="農業と都市をつなぐ、うままる野菜直売所の紹介ページです。" />
+  <style>
+    :root {
+      --bg: #fbfaf5;
+      --bg-soft: #f4f0e7;
+      --ink: #1f3326;
+      --green: #2f6d3c;
+      --green-soft: #dce9de;
+      --tomato: #da4f39;
+      --paprika: #efb11f;
+      --eggplant: #6f4e90;
+      --shishito: #5f9254;
+      --card: #fffdf7;
+      --line: #e9e1d2;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #fff 0%, var(--bg) 100%);
+      line-height: 1.8;
+    }
+    img { max-width: 100%; display: block; }
+    .container { width: min(1160px, 92vw); margin: 0 auto; }
+    .section { padding: 56px 0; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 28px; }
+
+    .img-box { border-radius: 28px; overflow: hidden; background: var(--bg-soft); border: 1px solid var(--line); min-height: 240px; position: relative; }
+    .img-box img { width: 100%; height: 100%; object-fit: cover; }
+    .img-box::after {
+      content: "画像準備中";
+      position: absolute; inset: 0; display: grid; place-items: center;
+      color: #816d47; background: repeating-linear-gradient(45deg, #f5efdf, #f5efdf 14px, #f0e8d4 14px, #f0e8d4 28px);
+      font-size: 0.95rem; letter-spacing: 0.08em;
+    }
+    .img-box:has(img[src])::after { opacity: 0; }
+
+    header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.92); backdrop-filter: blur(6px); border-bottom: 1px solid #eee5d8; }
+    .header-inner { display:flex; align-items:center; justify-content:space-between; padding: 14px 0; gap:16px; }
+    .logo-sm { width: 120px; }
+    nav ul { list-style:none; display:flex; gap:20px; padding:0; margin:0; font-size:.84rem; }
+    nav a { text-decoration:none; color:var(--ink); }
+    .sns { display:flex; gap:8px; }
+    .icon { width:34px; height:34px; border-radius:50%; border:1px solid var(--line); display:grid; place-items:center; font-size:.85rem; background:#fff; }
+
+    .hero { display:grid; grid-template-columns: 1fr 1.1fr; gap:40px; align-items:center; padding:52px 0 72px; }
+    .hero-logo { width: 260px; margin-bottom: 24px; }
+    h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height:1.45; margin:0 0 16px; }
+    .accent { color: #dd8f2d; font-weight: 700; }
+    .hero .lead { font-size: 1.02rem; max-width: 33ch; }
+    .btns { display:flex; flex-wrap:wrap; gap:12px; margin-top: 20px; }
+    .btn { border-radius:999px; padding:12px 22px; border:1px solid var(--green); text-decoration:none; font-weight:700; font-size:.95rem; }
+    .btn.main { background:var(--green); color:#fff; }
+    .btn.sub { color:var(--green); background:#fff; }
+    .speech { position:absolute; top:26px; right:26px; background:#fff; border:1px solid var(--line); border-radius:999px; padding:12px 18px; font-weight:700; }
+
+    .two-col { display:grid; grid-template-columns: 1fr 1fr; gap:28px; align-items:center; }
+    h2 { font-size: clamp(1.35rem, 3vw, 2rem); margin-top:0; }
+
+    .quality-grid, .product-grid, .activity-grid { display:grid; gap:16px; }
+    .quality-grid { grid-template-columns: repeat(4,1fr); }
+    .quality-card { padding:18px; border-radius:20px; background:#fff; border:1px solid var(--line); }
+    .num { width:36px; height:36px; border-radius:50%; display:grid; place-items:center; color:#fff; font-weight:700; margin-bottom:10px; }
+
+    .product-wrap { display:grid; grid-template-columns: 3fr 1fr; gap:16px; }
+    .product-grid { grid-template-columns: repeat(4,1fr); }
+    .label { display:inline-block; padding:2px 12px; border-radius:5px; color:#fff; font-size:.8rem; margin-bottom:8px; transform:rotate(-2deg); }
+
+    .activity-grid { grid-template-columns: repeat(3,1fr); }
+    .insta { display:grid; grid-template-columns: 1.2fr .8fr; gap:16px; align-items:center; }
+    .insta-mini { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+
+    footer { background:#21492c; color:#fff; padding:32px 0; margin-top: 36px; }
+    footer a { color:#fff; text-decoration:none; }
+
+    .deco-leaf::before { content:"❦"; color:#86a37b; margin-right:.4em; }
+
+    @media (max-width: 980px) {
+      nav { display:none; }
+      .hero, .two-col, .product-wrap, .insta { grid-template-columns:1fr; }
+      .quality-grid { grid-template-columns: repeat(2,1fr); }
+      .product-grid { grid-template-columns: repeat(2,1fr); }
+      .activity-grid { grid-template-columns:1fr; }
+      .hero-logo { width: 200px; }
+    }
+    @media (max-width: 640px) {
+      .section { padding: 42px 0; }
+      .quality-grid, .product-grid { grid-template-columns:1fr; }
+      .card { padding:22px; }
+      .speech { position: static; display: inline-block; margin: 10px 0 0; }
+    }
+  </style>
 </head>
 <body>
-  <main class="app">
-    <header class="app-header">
-      <p class="eyebrow">ハウス栽培向け</p>
-      <h1>農家訪問前 気象チェック</h1>
-      <p class="lead">都道府県（県庁所在地）ごとの直近/予報7日間を比較できます。</p>
-    </header>
+  <header>
+    <div class="container header-inner">
+      <img class="logo-sm" src="images/logo.png" alt="うままるロゴ">
+      <nav><ul>
+        <li><a href="#about">うままるとは</a></li><li><a href="#story">始めた理由</a></li><li><a href="#quality">美味しさ</a></li>
+        <li><a href="#products">商品紹介</a></li><li><a href="#activity">販売場所・活動</a></li><li><a href="#business">法人の方へ</a></li><li><a href="#contact">お問い合わせ</a></li>
+      </ul></nav>
+      <div class="sns"><span class="icon">IG</span><span class="icon">LINE</span></div>
+    </div>
+  </header>
 
-    <section class="controls card">
-      <label>
-        都道府県
-        <select id="prefectureSelect" aria-label="都道府県"></select>
-      </label>
-      <label>
-        表示期間
-        <select id="periodSelect" aria-label="表示期間">
-          <option value="past">過去7日</option>
-          <option value="future">今後7日</option>
-        </select>
-      </label>
-      <button id="loadButton" type="button">更新</button>
-    </section>
-
-    <section id="errorBox" class="error hidden" role="alert"></section>
-
-    <section class="summary-grid">
-      <article class="card stat-card">
-        <h2>選択地点</h2>
-        <p id="selectedPlace">-</p>
-      </article>
-      <article class="card stat-card">
-        <h2>7日間の日射量合計</h2>
-        <p><span id="sumRadiation">-</span> MJ/㎡</p>
-      </article>
-      <article class="card stat-card">
-        <h2>1日平均日射量</h2>
-        <p><span id="avgRadiation">-</span> MJ/㎡/日</p>
-      </article>
-      <article class="card stat-card">
-        <h2>低日射日数</h2>
-        <p><span id="lowRadiationDays">-</span> 日</p>
-        <small id="lowRadiationComment"></small>
-      </article>
-    </section>
-
-    <section class="table-wrap card">
-      <h2>日別データ</h2>
-      <div class="table-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>日付</th>
-              <th>天気</th>
-              <th>日射量<br>MJ/㎡/日</th>
-              <th>最高気温</th>
-              <th>最低気温</th>
-              <th>昼平均気温</th>
-              <th>夜平均気温</th>
-              <th>降水量</th>
-              <th>湿度</th>
-            </tr>
-          </thead>
-          <tbody id="weatherTableBody">
-            <tr><td colspan="9">データを読み込み中...</td></tr>
-          </tbody>
-        </table>
+  <main class="container">
+    <section class="hero">
+      <div>
+        <img class="hero-logo" src="images/logo.png" alt="うままる 野菜直売所">
+        <h1>農業と都市をつなぐ。<br>その間に立つのが、<span class="accent">うままる</span>です。</h1>
+        <p class="lead">地方の農家さんがつくる本当に美味しいものを、都市のお客様に届ける。販売・流通・現場理解を通じて、農業に総合的に関わることを目指しています。</p>
+        <div class="btns"><a class="btn main" href="#activity">販売場所を見る</a><a class="btn sub" href="#instagram">Instagramを見る</a></div>
       </div>
+      <div class="img-box" style="min-height:520px;"><img src="images/hero.jpg" alt="野菜とキッチンカー"><div class="speech">今日のおすすめ、あります。</div></div>
+    </section>
+
+    <section id="about" class="section two-col">
+      <div class="card"><h2>うままるとは？</h2><p>うままるは、農家直送の野菜や果物を扱う八百屋です。ただ仕入れて並べるのではなく、どんな人が、どんな想いで作ったのかまで含めて届けることを大切にしています。味・鮮度・背景。そのすべてが揃ってはじめて、「ちゃんと美味しい」と考えています。</p></div>
+      <div class="img-box"><img src="images/about.jpg" alt="うままるスタッフ"></div>
+    </section>
+
+    <section id="story" class="section two-col">
+      <div class="img-box"><img src="images/story.jpg" alt="配送の様子"></div>
+      <div class="card"><h2>なぜ、うままるを始めたのか</h2><p>うままるの始まりは、本業であるトラック運送の帰り便でした。荷物を届けた後、空のまま戻る荷台を見て「この動きを農家さんのために使えないか」と考えたのがきっかけです。前職では農業資材メーカーの営業として、全国の農家さんと関わってきました。品質を高めるために努力を重ねる生産者の姿を見てきた一方で、その価値が販売の現場では伝わりきっていない現実も感じていました。だからこそ、農家さんの想いごと届ける売り方を、自分でやろうと決めました。</p></div>
+    </section>
+
+    <section class="section two-col">
+      <div class="card"><h2>お店に立っている人</h2><p>販売スタッフである妻が店頭に立ち、お客様と会話しながらおすすめや食べ方をお伝えしています。「これどうやって食べるの？」という声にも丁寧にお応えし、野菜の価値がもっと伝わる売り場づくりを目指しています。</p><p class="speech" style="position:static;">お気軽にお声がけくださいね！</p></div>
+      <div class="img-box"><img src="images/staff.jpg" alt="接客の様子"></div>
+    </section>
+
+    <section id="quality" class="section">
+      <h2 class="deco-leaf">なぜ美味しいのか？</h2>
+      <div class="quality-grid">
+        <article class="quality-card"><div class="num" style="background:var(--shishito)">01</div><h3>収穫してすぐに仕入れる</h3><div class="img-box"><img src="images/quality-1.jpg" alt="収穫直後"></div></article>
+        <article class="quality-card"><div class="num" style="background:var(--tomato)">02</div><h3>栽培方法まで確認</h3><div class="img-box"><img src="images/quality-2.jpg" alt="栽培管理"></div></article>
+        <article class="quality-card"><div class="num" style="background:var(--paprika)">03</div><h3>農家と直接やり取り</h3><div class="img-box"><img src="images/quality-3.jpg" alt="農家との会話"></div></article>
+        <article class="quality-card"><div class="num" style="background:var(--eggplant)">04</div><h3>旬の良いものだけ</h3><div class="img-box"><img src="images/quality-4.jpg" alt="旬野菜"></div></article>
+      </div>
+    </section>
+
+    <section id="products" class="section">
+      <h2>商品紹介</h2>
+      <div class="product-wrap">
+        <div class="product-grid">
+          <article class="card"><span class="label" style="background:var(--tomato)">ミニトマト</span><div class="img-box"><img src="images/tomato.jpg" alt="ミニトマト"></div></article>
+          <article class="card"><span class="label" style="background:var(--eggplant)">ナス</span><div class="img-box"><img src="images/eggplant.jpg" alt="ナス"></div></article>
+          <article class="card"><span class="label" style="background:var(--paprika)">パプリカ</span><div class="img-box"><img src="images/paprika.jpg" alt="パプリカ"></div></article>
+          <article class="card"><span class="label" style="background:var(--shishito)">シシトウ</span><div class="img-box"><img src="images/shishito.jpg" alt="シシトウ"></div></article>
+        </div>
+        <aside class="card"><h3>季節によってラインナップは変わります</h3><p>その時期に一番美味しいものを選び抜いてお届けします。</p></aside>
+      </div>
+    </section>
+
+    <section id="activity" class="section">
+      <h2>販売場所・活動</h2>
+      <div class="activity-grid">
+        <article class="card"><h3>店頭販売</h3><div class="img-box"><img src="images/shop.jpg" alt="店頭販売"></div></article>
+        <article class="card"><h3>イベント出店</h3><div class="img-box"><img src="images/marche.jpg" alt="マルシェ"></div></article>
+        <article class="card"><h3>農大マルシェ出店</h3><div class="img-box"><img src="images/nodai.jpg" alt="農大マルシェ"></div></article>
+      </div>
+    </section>
+
+    <section id="instagram" class="section insta card">
+      <div>
+        <h2>最新情報はInstagramへ</h2>
+        <p>入荷情報やおすすめ、出店情報を発信しています。</p>
+        <a class="btn main" href="#">Instagramを見る</a>
+        <p style="font-size:2rem; margin-top:10px;">🚚✎</p>
+      </div>
+      <div class="insta-mini">
+        <div class="img-box"><img src="images/instagram-1.jpg" alt="Instagram投稿1"></div>
+        <div class="img-box"><img src="images/instagram-2.jpg" alt="Instagram投稿2"></div>
+      </div>
+    </section>
+
+    <section id="business" class="section two-col">
+      <div class="card"><h2>法人の方へ</h2><p>飲食店・小売店・企業様への納品も行っています。安定した品質と柔軟な対応で、仕入れをサポートします。</p><ul><li>安定した品質</li><li>柔軟な対応</li><li>農家直送の強み</li></ul><a id="contact" class="btn main" href="#">取引相談・お問い合わせ</a></div>
+      <div class="img-box"><img src="images/business.jpg" alt="法人向け野菜納品"></div>
     </section>
   </main>
 
-  <script src="app.js" defer></script>
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; gap:16px; align-items:center; flex-wrap:wrap;">
+      <div><img class="logo-sm" src="images/logo.png" alt="うままるロゴ"><p>川口の農家直送八百屋・キッチンカー</p></div>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <a href="#about">うままるとは</a><a href="#story">始めた理由</a><a href="#quality">美味しさ</a><a href="#products">商品紹介</a><a href="#activity">販売場所・活動</a><a href="#business">法人の方へ</a><a href="#contact">お問い合わせ</a>
+      </div>
+      <div class="sns"><span class="icon">IG</span><span class="icon">LINE</span></div>
+    </div>
+  </footer>
 </body>
 </html>
